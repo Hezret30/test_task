@@ -11,11 +11,12 @@ const signUp = async (req, res) => {
 
     try {
         const boss = await Boss.findOne({
+            attributes: ['email'],
             where: { email: email }
         })
 
         if (boss) {
-            res.status(400).json({ message: 'User with this email exits!'})
+            res.status(401).json({ message: 'User with this email exits!'})
         } else {
             
             await Boss.create({
@@ -42,11 +43,11 @@ const signIn = async (req, res) => {
         async function get_boss (b) {
             
             const boss = await Boss.findAll({
+                attributes: ['id', 'email', 'password'],
                 where: { email: b.email }
             })
             
             if (boss.length == 0) return 0
-            
             const validPassword = await bcrypt.compare(b.password, boss[0].password)
             if (!validPassword) return 0
             
@@ -56,7 +57,7 @@ const signIn = async (req, res) => {
         const id = await get_boss(info)
         
         if (id === 0)  res.status(400).send('Invalid email or password')
-    
+        
         const access_token = create_token(id, env.access_key, env.access_time)
         const refresh_token = create_token(id, env.refresh_key, env.refresh_time)
     
@@ -64,7 +65,6 @@ const signIn = async (req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(400).json({error: error.message})
     }
 }
 
@@ -83,7 +83,7 @@ const refreshToken = async (req, res) => {
 
     } catch (error) {
         
-        res.status(401).json({ message: error.message})
+        res.status(400).json({ message: error.message})
     }
 }
 

@@ -17,8 +17,6 @@ const getBoss = async (req, res) => {
         where: { id: id }
       })
     
-    if (boss.length == 0) return res.sendStatus(404)
-    
     res.status(200).json({ boss })
 }
 

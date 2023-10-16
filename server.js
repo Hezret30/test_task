@@ -21,3 +21,5 @@ app.listen(env.port, env.host, () => {
     sequelize.sync()
     console.log(`${env.host}:${env.port} is listening!`);
 })
+
+module.exports = app

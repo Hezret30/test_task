@@ -10,8 +10,6 @@ const fs = require('fs')
 
 const upload = multer({ dest: __dirname + './../static/bosses' })
 
-console.log(upload)
-
 router.post('/', guard, upload.single('image'), async (req, res) => {
     
     const boss_id = req.id

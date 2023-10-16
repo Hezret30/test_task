@@ -8,15 +8,15 @@ function guard(req, res, next) {
         if (!auth_header) {
             throw new Error("Authorization")
         }
-
+        
         if (auth_header) {
             const token = auth_header.split('Bearer ')[1]
 
             if (!token) return res.sendStatus(401)
-
+            
             const decoded_data = jwt.verify(token, env.access_key)
             req.id = decoded_data.data
-
+            
             next()
         }
     } catch (error) {
