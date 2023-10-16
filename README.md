@@ -26,4 +26,4 @@ npm run dev
 # it will also create all tables in the given database
 ```
 
-## API - [docs](https://github.com/Hezret30/test_task/api-docs)
+## API - [docs](https://github.com/Hezret30/test_task/tree/master/api-docs)
