@@ -88,7 +88,9 @@ const Employee = sequelize.define('Employee', {
 
 
 
-Boss.hasMany(Employee)
+Boss.hasMany(Employee, {
+    onDelete: 'CASCADE'
+})
 Employee.belongsTo(Boss)
 
 
